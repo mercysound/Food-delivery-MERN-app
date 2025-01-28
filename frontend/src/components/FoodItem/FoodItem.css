@@ -10,5 +10,8 @@
 .food-item-image{
   width: 100%;
   border: 15px 15px 0px 0px;
-  
+
+}
+.food-item-info{
+  padding: 20px
 }
