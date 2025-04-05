@@ -10,7 +10,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // placing user order from frontend
 const placeOrder = async (req, res) => {
 
-  const front_url = "http://locahost:5173";
+  const front_url = "http://localhost:5173";
 
   try {
     console.log(req.body.userId);
@@ -34,17 +34,17 @@ const placeOrder = async (req, res) => {
       },
       quantity: item.quantity
     }))
-
+      console.log( line_items);
       line_items.push({
         price_data:{
           currency:"ngn",
           product_data:{
-          name:"Delivey Charges"
+            name:"Delivey Charges"
+          },
+          unit_amount:2*100
         },
-        unit_amount:2*100
-      },
-      quantity:1
-  })
+        quantity:1
+      })
 
   const session = await stripe.checkout.sessions.create({
     line_items:line_items,
@@ -54,16 +54,31 @@ const placeOrder = async (req, res) => {
   })
 
   res.json({success:true, session_url: session.url});
-  
-} catch (error) {
+} catch (error) { 
   console.log(error);
-  // res.json({success:false, message:"Error"});
-  res.status(500).json({ success: false, message: error.message });
+  res.json({success:false, message:"Error"});
+  // res.status(500).json({ success: false, message: error.message });
   }
   
 }
-export { placeOrder }
 
+const verifyOrder = async (req, res) => {
+  const {orderId, success} = req.body;
+  try {
+    if (success=="true") {
+      await orderModel.findByIdAndUpdate(orderId, {payment:true})
+      res.json({success:true, message:"Paid"})
+    }else{
+      await orderModel.findByIdAndDelete(orderId)
+      res.json({success:false, message:"Not Paid"})
+    }
+  } catch (error) {
+    console.log("Error");
+    res.json({success:false, message:"Error"})
+    
+  }
+}
+export { placeOrder, verifyOrder }
 
 
 

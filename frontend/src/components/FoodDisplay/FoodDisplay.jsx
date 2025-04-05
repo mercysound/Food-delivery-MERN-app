@@ -17,7 +17,6 @@ const FoodDisplay = ({category}) => {
             
           }
         })}
-        {console.log(food_list)}
       </div>
     </div>
   )
