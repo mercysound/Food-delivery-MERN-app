@@ -5,24 +5,27 @@ import { StoreContext } from '../../context/FoodContext';
 import { useEffect } from 'react';
 import axios from 'axios';
 const Verify = () => {
-  const [searchParaams, setSearchParams] = useSearchParams();
-  const success = searchParaams.get("success");
-  const orderId = searchParaams.get("orderId");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const success = searchParams.get("success");
+  const orderId = searchParams.get("orderId");
+  console.log(success, orderId);
+  
   const {url} = useContext(StoreContext);
   const navigate = useNavigate()
 
   const verifyPayment = async () => {
-    const response = await axios.post(url+"/api/order/verify", {success, orderId});
+    const response = await axios.post(url+"/api/order/verify",{success,orderId});
     if (response.data.success) {
       navigate("/myorders")
-      console.log(response.data.success);
-      
     }else{
       navigate("/")
     }
   }
   useEffect(()=>{
-    verifyPayment()
+    const verify = async () => {
+      await verifyPayment()
+    }
+    verify()
   },[])
   return (
     <div className='verify'>
