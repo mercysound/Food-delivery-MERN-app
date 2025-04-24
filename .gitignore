@@ -11,6 +11,3 @@
 
 .env
 
-# Build files
-**/build/
-**/dist/
