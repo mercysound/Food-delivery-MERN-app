@@ -8,8 +8,6 @@ const Cart = () => {
 
   const navigate = useNavigate()
   
-  console.log(getTotalCartAmount(), token);
-  
 
   return (
     <div className='cart'>

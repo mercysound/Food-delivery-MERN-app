@@ -1,0 +1,16 @@
+# Node.js dependencies
+# Ignore all node_modules folders
+**/node_modules/
+
+# Environment variables
+# Ignore all .env files
+**/.env
+
+# Logs
+*.log
+
+.env
+
+# Build files
+**/build/
+**/dist/
