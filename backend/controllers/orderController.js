@@ -1,5 +1,4 @@
 import orderModel from "../models/orderModel.js";
-// import userModel from "../models/userModel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
 
@@ -11,8 +10,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const placeOrder = async (req, res) => {
  const front_url = "https://food-delivery-mern-app-git-main-adekunles-projects-4c114af5.vercel.app";
 //  const front_url = "http://localhost:5173";
-//  const front_url = "https://food-delivery-mern-app-git-main-adekunles-projects-4c114af5.vercel.app";
- https://food-delivery-mern-app-git-main-adekunles-projects-4c114af5.vercel.app/
   try {
     const newOrder = new orderModel({
       userId: req.body.userId,
