@@ -9,6 +9,7 @@ const StoreContextProvider = (props) => {
   // is for adding to cart item func
    const [cartItems, setCartItems] = useState({});
    const url = "https://food-delivery-mern-app.onrender.com";
+   console.log("API URL:", url);
    const [token, setToken] = useState("")
   //  using this following to fetch food data from db and override fetching from FE assets file
    const [food_list, setFoodList] = useState([])

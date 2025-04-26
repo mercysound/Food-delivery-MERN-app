@@ -16,6 +16,10 @@ const port = 4000;
 // middleware
 app.use(express.json())
 app.use(cors());
+// app.use(cors({
+//   origin: 'https://food-delivery-mern-app-git-main-adekunles-projects-4c114af5.vercel.app',
+//   credentials: true
+// }));
 
 // db connection
 connectDb();
