@@ -39,6 +39,6 @@
     flex-direction: column;
   }
   .place-order-right{
-    justify-content: start;
+    /* justify-content: start; */
   }
 }
