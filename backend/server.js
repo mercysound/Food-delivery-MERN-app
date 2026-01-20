@@ -11,18 +11,28 @@ import orderRouter from "./Routes/orderRoute.js";
 
 //app config 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 // middleware
 app.use(express.json())
-app.use(cors());
-// app.use(cors({
-//   origin: 'https://food-delivery-mern-app-git-main-adekunles-projects-4c114af5.vercel.app',
-//   credentials: true
-// }));
+// app.use(cors()); // this use allow all origins
+app.use(cors({
+  origin: 'https://food-delivery-mern-app-git-main-adekunles-projects-4c114af5.vercel.app',
+  credentials: true
+}));
+
+// render cold start health
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
 
 // db connection
-connectDb();
+// connectDb(); 
+// Render best cold-start behavior, this is ideal:
+connectDb()
+  .then(() => console.log("DB connected"))
+  .catch(err => console.error("DB error:", err));
+
 
 // api endpoints
 app.use("/api/food", foodRouter)
